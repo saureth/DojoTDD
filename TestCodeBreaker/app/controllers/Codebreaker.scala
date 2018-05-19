@@ -9,7 +9,19 @@ import play.api.mvc._
  * application's home page.
  */
 @Singleton
-class Codebreaker {
+class Codebreaker @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+
+
+  def trySecretService(num:String) = Action{
+
+    val res = trySecret(num);
+    val resToJson = Json.toJson(res);
+    Ok(resToJson);
+    
+  }
+
+
+
 
     var secret = "1234"
     var xs = ""
